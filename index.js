@@ -14,7 +14,8 @@ const client = new Client({
 });
 
 // حط توكن البوت هنا لاحقًا
-const TOKEN = "PUT_YOUR_BOT_TOKEN_HERE";
+const TOKEN = process.env.TOKEN;
+
 
 const prefix = "-";
 
