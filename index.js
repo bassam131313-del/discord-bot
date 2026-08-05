@@ -147,4 +147,54 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
     await interaction.showModal(modal);
   }});
-client.login(TOKEN);
+client.login(TOKEN);client.on(Events.InteractionCreate, async (interaction) => {
+  if (!interaction.isModalSubmit()) return;
+  if (interaction.customId !== "verify_modal") return;
+
+  const name = interaction.fields.getTextInputValue("name");
+  const age = interaction.fields.getTextInputValue("age");
+  const roblox = interaction.fields.getTextInputValue("roblox");
+  const country = interaction.fields.getTextInputValue("country");
+  const image = interaction.fields.getTextInputValue("image");
+
+  const channel = await client.channels.fetch(VERIFY_REQUESTS_CHANNEL_ID).catch(() => null);
+  if (!channel) {
+    return interaction.reply({
+      content: "❌ لم يتم العثور على روم طلبات التفعيل.",
+      ephemeral: true,
+    });
+  }
+
+  const embed = new EmbedBuilder()
+    .setTitle("📋 طلب تفعيل جديد")
+    .addFields(
+      { name: "👤 الاسم", value: name },
+      { name: "🎂 العمر", value: age },
+      { name: "🎮 روبلوكس", value: roblox },
+      { name: "🌍 الدولة", value: country },
+      { name: "🖼️ الصورة", value: image }
+    )
+    .setFooter({ text: interaction.user.id });
+
+  const row = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setCustomId(`accept_${interaction.user.id}`)
+      .setLabel("✅ قبول")
+      .setStyle(ButtonStyle.Success),
+
+    new ButtonBuilder()
+      .setCustomId(`reject_${interaction.user.id}`)
+      .setLabel("❌ رفض")
+      .setStyle(ButtonStyle.Danger)
+  );
+
+  await channel.send({
+    embeds: [embed],
+    components: [row],
+  });
+
+  await interaction.reply({
+    content: "✅ تم إرسال طلب التفعيل.",
+    ephemeral: true,
+  });
+});
