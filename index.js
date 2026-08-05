@@ -1,7 +1,15 @@
-import {
+import. {
   Client,
   GatewayIntentBits,
-  PermissionsBitField
+  PermissionsBitField,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  ModalBuilder,
+  TextInputBuilder,
+  TextInputStyle,
+  EmbedBuilder,
+  Events
 } from "discord.js";
 
 const client = new Client({
