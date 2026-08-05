@@ -1,4 +1,4 @@
-import. {
+import  {
   Client,
   GatewayIntentBits,
   PermissionsBitField,
@@ -23,7 +23,7 @@ const client = new Client({
 
 // حط توكن البوت هنا لاحقًا
 const TOKEN = process.env.TOKEN;
-
+const prefix = "-";
 
 const VERIFY_CHANNEL_ID = "1534306655691608135";
 const VERIFY_REQUESTS_CHANNEL_ID = "1534306714604667040";
@@ -146,5 +146,5 @@ client.on(Events.InteractionCreate, async (interaction) => {
     );
 
     await interaction.showModal(modal);
-  }
-});
+  }});
+client.login(TOKEN);
