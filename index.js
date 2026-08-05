@@ -30,7 +30,7 @@ const VERIFY_REQUESTS_CHANNEL_ID = "1534306714604667040";
 const VERIFY_LOG_CHANNEL_ID = "1534306771382960288";
 
 // بنضيف ID رتبة Verified لاحقًا
-const VERIFIED_ROLE_ID = "";
+const VERIFIED_ROLE_ID = "1534308519753416946";
 
 client.once("ready", async () => {
   console.log(`${client.user.tag} is online!`);
